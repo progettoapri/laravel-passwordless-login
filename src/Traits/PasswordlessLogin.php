@@ -59,18 +59,6 @@ trait PasswordlessLogin
         return config('laravel-passwordless-login.login_use_once');
     }
 
-    /**
-     * Returns the key to be used to retrieve the model.
-     *
-     * @return string
-     */
-    public function getLoginKeyName()
-    {
-        $keyName = config('laravel-passwordless-login.model_key');
-
-        return empty($keyName) ? $this->getKeyName() ?? 'id' : $keyName;
-    }
-
     public function createPasswordlessLoginLink()
     {
         return (new LoginUrl($this))->generate();

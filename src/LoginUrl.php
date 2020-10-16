@@ -47,7 +47,7 @@ class LoginUrl
 
     public function generate()
     {
-        $idField = method_exists($this->user, 'getLoginKeyName') ? $this->user->getLoginKeyName() : 'id';
+        $idField = $this->user->getKeyName() ?? 'id';
 
         return URL::temporarySignedRoute(
             $this->route_name,

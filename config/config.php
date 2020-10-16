@@ -10,5 +10,4 @@ return [
     'redirect_on_success'       => env('LPL_REDIRECT_ON_LOGIN', '/'),
     'login_use_once'            => env('LPL_USE_ONCE', false),
     'invalid_signature_message' => env('LPL_INVALID_SIGNATURE_MESSAGE', ''),
-    'model_key'                 => env('LPL_MODEL_KEY', ''),
 ];

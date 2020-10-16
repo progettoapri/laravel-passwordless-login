@@ -113,19 +113,6 @@ class SignedUrlTest extends TestCase
     }
 
     /** @test */
-    public function allows_alternative_auth_model_key()
-    {
-        config(['laravel-passwordless-login.model_key' => 'email']);
-        $generator = new LoginUrl($this->model_user);
-        $this->url = $generator->generate();
-        $this->assertStringContainsString($this->model_user->{$this->model_user->getLoginKeyName()}, $this->url);
-        $response = $this->followingRedirects()->get($this->url);
-        $response->assertSuccessful();
-        $response->assertSee($this->model_user->name);
-        $this->assertAuthenticatedAs($this->model_user);
-    }
-
-    /** @test */
     public function an_expired_request_will_not_log_user_in()
     {
         sleep(config('laravel-passwordless-login.login_route_expires') + 1);
