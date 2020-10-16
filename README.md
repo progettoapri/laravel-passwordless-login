@@ -61,6 +61,11 @@ class User extends Authenticatable
     {
         return config('laravel-passwordless-login.redirect_on_success');
     }
+
+    public function getLoginKeyName() : string
+    {
+        return config('laravel-passwordless-login.model_key') ?? $this->getKeyName();
+    }
 }
 ```
 If you are using the PasswordlessLogin Trait, you can generate a link using the defaults defined in the trait by simply calling `createPasswordlessLoginLink()` on the user you want to log in.
@@ -79,6 +84,7 @@ LPL_REDIRECT_ON_LOGIN=/
 LPL_USER_GUARD=web
 LPL_USE_ONCE=false
 LPL_INVALID_SIGNATURE_MESSAGE="Expired or Invalid Link"
+LPL_MODEL_KEY=id
 ```
 LPL_USER_MODEL is the the authenticatable model you are logging in (usually App\User)
 
@@ -95,6 +101,8 @@ LPL_REDIRECT_ON_LOGIN is where you want to send the user after they've logged in
 LPL_USE_ONCE is whether you want a link to expire after first use (uses cache to store used links)
 
 LPL_INVALID_SIGNATURE_MESSAGE is a custom message sent when we abort with a 401 status on an invalid or expired link
+
+LPL_MODEL_KEY is the name of the field you want to use to retrieve the user
 
 ### Reporting Issues
 

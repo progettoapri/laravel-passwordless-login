@@ -49,7 +49,9 @@ class PasswordlessLoginService
         if (\request()->has('user_type')) {
             $userModel = UserClass::fromSlug(request('user_type'));
 
-            return $userModel::findOrFail(request('uid'));
+            $keyName = method_exists($userModel, 'getLoginKeyName') ? (new $userModel)->getLoginKeyName() : 'id';
+
+            return $userModel::where($keyName, request('uid'))->firstOrFail();
         }
     }
 
