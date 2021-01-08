@@ -2,7 +2,7 @@
 
 namespace Grosv\LaravelPasswordlessLogin;
 
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Contracts\Auth\Authenticatable as User;
 use Illuminate\Support\Facades\URL;
 
 class LoginUrl
@@ -53,7 +53,7 @@ class LoginUrl
             $this->route_name,
             $this->route_expires,
             [
-                'uid'           => $this->user->$idField,
+                'uid'           => urlencode($this->user->$idField),
                 'redirect_to'   => $this->redirect_url,
                 'user_type'     => UserClass::toSlug(get_class($this->user)),
             ]

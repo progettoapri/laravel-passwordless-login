@@ -44,10 +44,10 @@ class User extends Authenticatable
 
     public function getGuardNameAttribute(): string 
     {
-        return config('laravel-passwordless-login.remember_login');
+        return config('laravel-passwordless-login.user_guard');
     }
     
-    public function shouldRememberLoginAttribute(): bool
+    public function getShouldRememberLoginAttribute(): bool
     {
         return config('laravel-passwordless-login.remember_login');
     }
@@ -70,10 +70,10 @@ class User extends Authenticatable
 ```
 If you are using the PasswordlessLogin Trait, you can generate a link using the defaults defined in the trait by simply calling `createPasswordlessLoginLink()` on the user you want to log in.
 
-The biggest mistake I could see someone making with this package is creating a login link for one user and sending it to another. Please be careful and test your code. I don't want anyone getting mad at me for somoene else's silliness. 
+The biggest mistake I could see someone making with this package is creating a login link for one user and sending it to another. Please be careful and test your code. I don't want anyone getting mad at me for someone else's silliness. 
 
 ### Configuration
-You can publish the config file or just set the values you wan to use in your .env file:
+You can publish the config file or just set the values you want to use in your .env file:
 ```dotenv
 LPL_USER_MODEL=App\User
 LPL_REMEMBER_LOGIN=false
