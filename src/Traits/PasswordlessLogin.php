@@ -76,6 +76,11 @@ trait PasswordlessLogin
         return (new LoginUrl($this))->generate();
     }
 
+    public function createEndlessPasswordlessLoginLink()
+    {
+        return (new LoginUrl($this))->generate(true);
+    }
+
     /**
      * This is a callback called on a successful login.
      *

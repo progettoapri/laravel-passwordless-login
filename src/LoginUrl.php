@@ -45,9 +45,21 @@ class LoginUrl
         $this->redirect_url = $redirectUrl;
     }
 
-    public function generate()
+    public function generate($endless = false)
     {
         $idField = method_exists($this->user, 'getLoginKeyName') ? $this->user->getLoginKeyName() : 'id';
+
+        if ($endless) {
+            return URL::signedRoute(
+                $this->route_name,
+                $this->route_expires,
+                [
+                    'uid'           => urlencode($this->user->$idField),
+                    'redirect_to'   => $this->redirect_url,
+                    'user_type'     => UserClass::toSlug(get_class($this->user)),
+                ]
+            );
+        }
 
         return URL::temporarySignedRoute(
             $this->route_name,
